@@ -220,13 +220,11 @@ $(document).ready(function(){
 	$("#form-access-token").on("submit", function(event){
 		event.preventDefault();
 		var accessToken = $("#access-token").val();
-		if(!$("#repoId").val()){
+		if(!accessToken){
 			$(".at-error").show();
 			return false;
 		}
 		//Save Token to Local Storage
 		location.reload();
 	});
-
-
 });
