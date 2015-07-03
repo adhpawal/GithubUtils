@@ -1,12 +1,19 @@
 
 var FILTER_STRING_KEY="filterString";
+
 $(document).ready(function(){
 	 var GET_FILTER_STRING="getFilterString";
 	 var SAVE_FILTER_DATA="saveFilterData";
 	 var OKAY="ok";
+	 var OPEN_ISSUE_BOARD_PAGE="openIssueBoardPage";
+
 	//populate filter text area after page load.
 	populateFilterTextArea();
-	//add message listners
+
+	/**
+	** Add message listners for messages. Listeners listen for message from popup.js and dom.js
+	** These listeners serve as trigger to take appropriate action.
+	**/
 	chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 		console.log("request data for extension.js is : "+request);
 		 if (request.action == "read_file"){
@@ -42,6 +49,13 @@ $(document).ready(function(){
 				   
 	        });
 		 }
+
+		 //message listener to open new tab for issue board
+		 else if(request.action==OPEN_ISSUE_BOARD_PAGE){
+		 	var boardPageUrl=chrome.extension.getURL("swimlanes.html");
+		 	chrome.tabs.create({url:boardPageUrl});
+		 }
+
 		 return true;
 	});
 
