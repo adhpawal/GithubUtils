@@ -25,9 +25,7 @@ $(document).ready(function(){
 	var OKAY="ok";
 	var SAVE_PARAMETER_ACTION="saveParameters";
 
-	//call actions for issue page
 	actionForIssueBoardPage();
-
 	/**
 	* Function to perform actions for issue board page.
 	* Actions include check git oauth key,value in local storage.
@@ -41,7 +39,7 @@ $(document).ready(function(){
 			console.log(resonseValue[OAUTH_STORAGE_KEY],resonseValue[STORED_REPO_KEY]);
 			if(resonseValue!="" || resonseValue!=null){
 				OAUTH_KEY_VALUE=resonseValue[OAUTH_STORAGE_KEY];
-				if(OAUTH_KEY_VALUE!="" || OAUTH_KEY_VALUE!=null){
+				if(OAUTH_KEY_VALUE!="" || !OAUTH_KEY_VALUE){
 					IS_GIT_LOGGED_IN=true;
 				}
 				PREFERRED_REPO_VALUE=resonseValue[STORED_REPO_KEY];
@@ -54,6 +52,9 @@ $(document).ready(function(){
 			console.log(OAUTH_KEY_VALUE,PREFERRED_REPO_VALUE,STORED_MILESTONE_VALUE,LABEL_1_VALUE,LABEL_2_VALUE,LABEL_3_VALUE,LABEL_4_VALUE,IS_GIT_LOGGED_IN);
 			if(OAUTH_KEY_VALUE!="" || !OAUTH_KEY_VALUE){
 				$("#accessed-content").show();
+				//call actions for issue page
+				getGithubRequiredVariables();
+
 			}else{
 				$("#page-wrapper-access-token").show();
 				$("#accessed-content").hide();
@@ -68,7 +69,7 @@ $(document).ready(function(){
 	function getGithubRequiredVariables(){
 		if(IS_GIT_LOGGED_IN){
 			getAllGitRepository();
-			getGitMilestone();
+			//getGitMilestone();
 		}
 	}
 
@@ -80,10 +81,10 @@ $(document).ready(function(){
 		$.ajax({
 			url:GET_ALL_REPO_URL,
 			type:"GET",
-			beforeSend:function(xhr){xhr.setRequestHeader("Authorization:","token "+OAUTH_KEY_VALUE)},
+			beforeSend:function(xhr){xhr.setRequestHeader("Authorization","token "+OAUTH_KEY_VALUE)},
 			success:function(data){
 				 $.each(data, function(index) {
-		            REPOSITORY.push(data[index].name);
+		            REPOSITORY.push(data[index]);
 		        });
 			}
 		});
@@ -100,10 +101,10 @@ $(document).ready(function(){
 		$.ajax({
 			url:mileStoneApiUrl,
 			type:"GET",
-			beforeSend:function(xhr){xhr.setRequestHeader("Authorization:","token "+OAUTH_KEY_VALUE)},
+			beforeSend:function(xhr){xhr.setRequestHeader("Authorization","token "+OAUTH_KEY_VALUE)},
 			success:function(data){
 				 $.each(data, function(index) {
-		            MILESTONE.push(data[index].name);
+		            MILESTONE.push(data[index]);
 		        });
 			}
 		});
@@ -119,10 +120,10 @@ $(document).ready(function(){
 		$.ajax({
 			url:issueApiUrl,
 			type:"GET",
-			beforeSend:function(xhr){xhr.setRequestHeader("Authorization:","token "+OAUTH_KEY_VALUE)},
+			beforeSend:function(xhr){xhr.setRequestHeader("Authorization","token "+OAUTH_KEY_VALUE)},
 			success:function(data){
 				$.each(data, function(index) {
-		            ISSUE.push(data[index].name);
+		            ISSUE.push(data[index]);
 		        });
 			}
 		});
@@ -138,10 +139,10 @@ $(document).ready(function(){
 		$.ajax({
 			url:labelApiUrl,
 			type:"GET",
-			beforeSend:function(xhr){xhr.setRequestHeader("Authorization:","token "+OAUTH_KEY_VALUE)},
+			beforeSend:function(xhr){xhr.setRequestHeader("Authorization","token "+OAUTH_KEY_VALUE)},
 			success:function(data){
 				$.each(data, function(index) {
-		            LABEL.push(data[index].name);
+		            LABEL.push(data[index]);
 		        });
 			}
 		});
@@ -158,10 +159,10 @@ $(document).ready(function(){
 		$.ajax({
 			url:issueApiUrl,
 			type:"GET",
-			beforeSend:function(xhr){xhr.setRequestHeader("Authorization:","token "+OAUTH_KEY_VALUE)},
+			beforeSend:function(xhr){xhr.setRequestHeader("Authorization","token "+OAUTH_KEY_VALUE)},
 			success:function(data){
 				$.each(data, function(index) {
-		           console.log(data[index].name);
+		           console.log(data[index]);
 		        });
 			}
 		});
@@ -189,7 +190,7 @@ $(document).ready(function(){
 		$.ajax({
 			url:issueApiUrl,
 			type:"PATCH",
-			beforeSend:function(xhr){xhr.setRequestHeader("Authorization:","token "+OAUTH_KEY_VALUE)},
+			beforeSend:function(xhr){xhr.setRequestHeader("Authorization","token "+OAUTH_KEY_VALUE)},
 			data: updateData,
 			success:function(data){
 		           console.log("success");
@@ -250,4 +251,5 @@ $(document).ready(function(){
 		saveIssueBoardPageParameters(OAUTH_STORAGE_KEY,accessToken);
 		location.reload();
 	});
+
 });
