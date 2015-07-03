@@ -32,12 +32,12 @@ $(document).ready(function(){
 	document.getElementById("exclusive").onclick=enable1;
 	document.getElementById("inclusive").onclick=enable2;
 	function enable1(){
-	document.getElementById("filterArea1").disabled=false;
-	document.getElementById("filterArea2").disabled=true;
+		document.getElementById("filterArea1").disabled=false;
+		document.getElementById("filterArea2").disabled=true;
 	}
 	function enable2(){
-	document.getElementById("filterArea2").disabled=false;
-	document.getElementById("filterArea1").disabled=true;
+		document.getElementById("filterArea2").disabled=false;
+		document.getElementById("filterArea1").disabled=true;
 	}
 	
 });

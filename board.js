@@ -18,8 +18,10 @@ $(document).ready(function(){
 	var MILESTONE=[];
 	var REPOSITORY=[];
 	var GET_ALL_REPO_URL="https://api.github.com/user/repos";
-	var GET_STORED_OAUTH_VALUE="getStoredOauthValue";
+	var GET_STORED_VALUES_FOR_BOARD="getBoardParameters";
 	var GET_PREFERRED_REPO="getPreferredRepo";
+	var OKAY="ok";
+	var SAVE_PARAMETER_ACTION="saveParameters";
 
 	//call actions for issue page
 	actionForIssueBoardPage();
@@ -31,7 +33,7 @@ $(document).ready(function(){
 	* @author nimesh
 	**/
 	function actionForIssueBoardPage(){
-		chrome.runtime.sendMessage({action:GET_STORED_OAUTH_VALUE},function(response){
+		chrome.runtime.sendMessage({action:GET_STORED_VALUES_FOR_BOARD},function(response){
 			resonseValue=response.oauthValue;
 			console.log("oauth value: "+JSON.stringify(resonseValue));
 			console.log(resonseValue[OAUTH_STORAGE_KEY],resonseValue[STORED_REPO_KEY]);
@@ -188,6 +190,19 @@ $(document).ready(function(){
 		});
 	}
 
+	/**
+	* Method to save issue board page preferred parameters like repository,milestone,labels.
+	* @author nimesh
+	* @param value The value to be saved in local storage.
+	* @param key The key in which value is to be saved.
+	**/
+	function saveIssueBoardPageParameters(key,valueToSave){
+		chrome.runtime.sendMessage({action:SAVE_PARAMETER_ACTION,valueObj:valueToSave,key:key},function(response){
+			if(response.status==OKAY){
+				return true
+			}
+		});
+	}
 	//Defines Draggable Element
 	$(".draggable").draggable({
 		revert: "invalid",
