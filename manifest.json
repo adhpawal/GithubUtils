@@ -12,12 +12,12 @@
   },
 
   "background" : {
-     "scripts" : ["jquery-1.11.3.min.js","extension.js"]
+     "scripts" : ["jquery-1.11.3.min.js","extension.js","board.js"]
    },
 
   "content_scripts": [
     {
-    "matches": ["*://github.com/*/files"],
+    "matches": ["*://github.com/*/files","<all_urls>"],
     "js": ["jquery-1.11.3.min.js","dom.js"]
     }
    ],
