@@ -1,9 +1,20 @@
 $(document).ready(function(){
 	var ISSUE_BOARD_PAGE="swimlanes.html";
 	var OAUTH_KEY_VALUE="";
-	var IS_GIT_LOGGED_IN=true;
+	var OAUTH_STORAGE_KEY="oath_key";
+	var IS_GIT_LOGGED_IN=false;
 	var STORED_REPO_KEY="preferredRepo";
-	var PREFERRED_REPO_VALUE="74d00c0aad74ad71c67fa6ddaf70bf0e8f630e63";
+	var PREFERRED_REPO_VALUE="";
+	var STORED_MILESTONE_KEY="preferredMileStone";
+	var STORED_MILESTONE_VALUE="";
+	var LABEL_1_KEY="label_1";
+	var LABEL_2_KEY="label_2";
+	var LABEL_3_KEY="label_3";
+	var LABEL_4_KEY="label_4";
+	var LABEL_1_VALUE="";
+	var LABEL_2_VALUE="";
+	var LABEL_3_VALUE="";
+	var LABEL_4_VALUE="";
 	var MILESTONE=[];
 	var REPOSITORY=[];
 	var GET_ALL_REPO_URL="https://api.github.com/user/repos";
@@ -13,7 +24,6 @@ $(document).ready(function(){
 	//call actions for issue page
 	actionForIssueBoardPage();
 
-
 	/**
 	* Function to perform actions for issue board page.
 	* Actions include check git oauth key,value in local storage.
@@ -22,25 +32,24 @@ $(document).ready(function(){
 	**/
 	function actionForIssueBoardPage(){
 		chrome.runtime.sendMessage({action:GET_STORED_OAUTH_VALUE},function(response){
-			OAUTH_KEY_VALUE=response.oauthValue;
-			console.log("oauth value: "+OAUTH_KEY_VALUE);
-			if(OAUTH_KEY_VALUE!="" || OAUTH_KEY_VALUE!=null){
-				IS_GIT_LOGGED_IN=true;
-				console.log("logged : "+IS_GIT_LOGGED_IN);
+			resonseValue=response.oauthValue;
+			console.log("oauth value: "+JSON.stringify(resonseValue));
+			console.log(resonseValue[OAUTH_STORAGE_KEY],resonseValue[STORED_REPO_KEY]);
+			if(resonseValue!="" || resonseValue!=null){
+				OAUTH_KEY_VALUE=resonseValue[OAUTH_STORAGE_KEY];
+				if(OAUTH_KEY_VALUE!="" || OAUTH_KEY_VALUE!=null){
+					IS_GIT_LOGGED_IN=true;
+				}
+				PREFERRED_REPO_VALUE=resonseValue[STORED_REPO_KEY];
+				STORED_MILESTONE_VALUE=resonseValue[STORED_MILESTONE_KEY];
+				LABEL_1_VALUE=resonseValue[LABEL_1_KEY];
+				LABEL_2_VALUE=resonseValue[LABEL_2_KEY];
+				LABEL_3_VALUE=resonseValue[LABEL_3_KEY];
+				LABEL_4_VALUE=resonseValue[LABEL_4_KEY];
 			}
-			console.log("outside"+IS_GIT_LOGGED_IN);
-			getRepoKey();
+			console.log(OAUTH_KEY_VALUE,PREFERRED_REPO_VALUE,STORED_MILESTONE_VALUE,LABEL_1_VALUE,LABEL_2_VALUE,LABEL_3_VALUE,LABEL_4_VALUE,IS_GIT_LOGGED_IN);
 		});
 
-	}
-
-	function getRepoKey(){
-		chrome.runtime.sendMessage({action:STORED_REPO_KEY},function(response){
-			PREFERRED_REPO_VALUE=response.preferredRepo;
-			console.log("repo value"+PREFERRED_REPO_VALUE);
-			console.log('preferred repo: '+PREFERRED_REPO_VALUE);
-			getGithubRequiredVariables();
-		});
 	}
 	/**
 	* Method to get all required git variables like milestone,repository
@@ -49,7 +58,7 @@ $(document).ready(function(){
 	function getGithubRequiredVariables(){
 		if(IS_GIT_LOGGED_IN){
 			getAllGitRepository();
-			// getGitMilestone();
+			getGitMilestone();
 		}
 	}
 
