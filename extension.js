@@ -7,13 +7,12 @@ $(document).ready(function () {
     const OPEN_ISSUE_BOARD_PAGE = "openIssueBoardPage";
     const RELOAD_PAGE = "reloadPage";
     const ISSUE_BOARD_PAGE = "swimlanes.html";
-    var GET_STORED_OAUTH_VALUE = "getStoredOauthValue";
+    var GET_STORED_VALUES_FOR_BOARD="getBoardParameters";
     var OAUTH_STORAGE_KEY = "oath_key";
     var GET_PREFERRED_REPO = "getPreferredRepo";
     var STORED_REPO_KEY = "preferredRepo";
     var GET_FILTER_STRING = "getFilterString";
     var SAVE_FILTER_DATA = "saveFilterData";
-    var GET_STORED_OAUTH_VALUE = "getStoredOauthValue";
     var OAUTH_STORAGE_KEY = "oath_key";
     var GET_PREFERRED_REPO = "getPreferredRepo";
     var STORED_REPO_KEY = "preferredRepo";
@@ -27,6 +26,7 @@ $(document).ready(function () {
     var LABEL_2_VALUE = "";
     var LABEL_3_VALUE = "";
     var LABEL_4_VALUE = "";
+    var SAVE_PARAMETER_ACTION="saveParameters";
 
     //populate filter text area after page load.
     populateFilterTextArea();
@@ -80,7 +80,7 @@ $(document).ready(function () {
                 var boardPageUrl = chrome.extension.getURL(ISSUE_BOARD_PAGE);
                 chrome.tabs.create({url: boardPageUrl});
                 break;
-            case GET_STORED_OAUTH_VALUE :
+            case GET_STORED_VALUES_FOR_BOARD :
                 var oauthValue = "";
                 chrome.storage.sync.get([OAUTH_STORAGE_KEY, STORED_REPO_KEY, STORED_MILESTONE_KEY, LABEL_1_KEY, LABEL_2_KEY, LABEL_3_KEY, LABEL_4_KEY], function (data) {
                     if (data) {
@@ -96,6 +96,18 @@ $(document).ready(function () {
                     }
                 });
                 break;
+            case SAVE_PARAMETER_ACTION:
+            	var valueToSave=request.valueObj;
+            	var keyForSave=request.key;
+            	var valuePair={};
+            	valuePair[keyForSave]=valueToSave;
+            	chrome.storage.sync.set(valuePair,function(){
+            		if (chrome.runtime.lastError) {
+                        sendResponse({status: chrome.runtime.lastError.message});
+                    }
+                    sendResponse({status: OKAY});
+            	});
+            	break;
             default :
         }
         console.log("Returned State")
