@@ -48,8 +48,13 @@ $(document).ready(function(){
 				LABEL_4_VALUE=resonseValue[LABEL_4_KEY];
 			}
 			console.log(OAUTH_KEY_VALUE,PREFERRED_REPO_VALUE,STORED_MILESTONE_VALUE,LABEL_1_VALUE,LABEL_2_VALUE,LABEL_3_VALUE,LABEL_4_VALUE,IS_GIT_LOGGED_IN);
+			if(OAUTH_KEY_VALUE!="" || !OAUTH_KEY_VALUE){
+				$("#page-wrapper-access-token").show();
+				$("#accessed-content").hide();
+			}else{
+				$("#accessed-content").show();
+			}
 		});
-
 	}
 	/**
 	* Method to get all required git variables like milestone,repository
@@ -198,6 +203,7 @@ $(document).ready(function(){
 		}
 	});
 
+	//Setting Form Interceptor
 	$("#github-user-setting").on("submit", function(event){
 		$(".alert").hide();
 		event.preventDefault();
@@ -206,6 +212,21 @@ $(document).ready(function(){
 			return false;
 		}
 		$(".alert-success").show();
-		//reload page
+		//Save token to Local Storage
+		location.reload();
 	});
+
+	//Access Token Form Interceptor
+	$("#form-access-token").on("submit", function(event){
+		event.preventDefault();
+		var accessToken = $("#access-token").val();
+		if(!$("#repoId").val()){
+			$(".at-error").show();
+			return false;
+		}
+		//Save Token to Local Storage
+		location.reload();
+	});
+
+
 });
