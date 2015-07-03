@@ -77,6 +77,10 @@ $(document).ready(function () {
                 });
                 break;
             case OPEN_ISSUE_BOARD_PAGE :
+                var boardPageUrl = chrome.extension.getURL(ISSUE_BOARD_PAGE);
+                chrome.tabs.create({url: boardPageUrl});
+                break;
+            case GET_STORED_OAUTH_VALUE :
                 var oauthValue = "";
                 chrome.storage.sync.get([OAUTH_STORAGE_KEY, STORED_REPO_KEY, STORED_MILESTONE_KEY, LABEL_1_KEY, LABEL_2_KEY, LABEL_3_KEY, LABEL_4_KEY], function (data) {
                     if (data) {
