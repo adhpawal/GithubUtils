@@ -23,7 +23,7 @@ $(document).ready(function(){
 		if(filterString){
 			var filterPages=filterString.split(",");
 			for(var i=0; i<filterPages.length;i++){
-				$('div[data-path*="'+filterPages[i]+'"]').each(function (){
+				$('div[data-path*="'+filterPages[i].trim()+'"]').each(function (){
 					$(this).parent().hide();
 				});
 			}
