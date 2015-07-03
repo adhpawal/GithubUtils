@@ -126,6 +126,56 @@ $(document).ready(function(){
 		});
 	}
 
+	/**
+	* Method to get specific Issue for that repo.
+	* @param repoObject A javascript object containing attributes owner(owner organization) and name(name of the repo).
+	* @param issueNumber number of issue
+	* @author sanjaya
+	**/
+	function getSpecificIssues(repoObject, issueNumber){
+		var issueApiUrl="https://api.github.com/repos/"+repoObject.owner+"/"+repoObject.name+"/issues/"+issueNumber;
+		$.ajax({
+			url:issueApiUrl,
+			type:"GET",
+			beforeSend:function(xhr){xhr.setRequestHeader("Authorization: token",OAUTH_KEY_VALUE)},
+			success:function(data){
+				var mileStoneList=JSON.parse(data);
+				console.log(mileStoneList);
+			}
+		});
+	}
+
+	/**
+	* Method to edit specific Issue for that repo.
+	* @param repoObject A javascript object containing attributes owner(owner organization) and name(name of the repo).
+	* @param issueNumber number of issue to edit
+	* @param updateData eg: {
+					  "title": "Found a bug",
+					  "body": "I'm having a problem with this.",
+					  "assignee": "octocat",
+					  "milestone": 1,
+					  "state": "open",
+					  "labels": [
+					    "Label1",
+					    "Label2"
+					  ]
+					}
+	* @author sanjaya
+	**/
+	function editSpecificIssues(repoObject, issueNumber, updateData){
+		var issueApiUrl="https://api.github.com/repos/"+repoObject.owner+"/"+repoObject.name+"/issues/"+issueNumber;
+		$.ajax({
+			url:issueApiUrl,
+			type:"PATCH",
+			beforeSend:function(xhr){xhr.setRequestHeader("Authorization: token",OAUTH_KEY_VALUE)},
+			data: updateData,
+			success:function(data){
+				var mileStoneList=JSON.parse(data);
+				console.log(mileStoneList);
+			}
+		});
+	}
+
 	//Defines Draggable Element
 	$(".draggable").draggable({
 		revert: "invalid",
