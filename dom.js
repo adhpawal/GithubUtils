@@ -1,5 +1,5 @@
 
-var FILTER_STRING_KEY="filterString";
+const FILTER_STRING_KEY="filterString";
 
 $(document).ready(function(){
 

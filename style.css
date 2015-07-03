@@ -70,3 +70,21 @@ span{
 	font-size: 14px;
 	font-weight: bold;
 }
+
+aside{
+    background-color: red;
+    width: 200px;
+    height: 100%;
+}
+
+#issue-tracker header {
+    height: 70px;
+}
+
+
+
+
+
+
+
+
