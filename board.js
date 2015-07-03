@@ -21,7 +21,6 @@ $(document).ready(function(){
 	* @author nimesh
 	**/
 	function actionForIssueBoardPage(){
-
 		chrome.runtime.sendMessage({action:GET_STORED_OAUTH_VALUE},function(response){
 			OAUTH_KEY_VALUE=response.oauthValue;
 			console.log("oauth value: "+OAUTH_KEY_VALUE);
@@ -48,7 +47,6 @@ $(document).ready(function(){
 	* @author nimesh
 	**/
 	function getGithubRequiredVariables(){
-		console.log("get git vari");
 		if(IS_GIT_LOGGED_IN){
 			getAllGitRepository();
 			// getGitMilestone();
@@ -116,7 +114,7 @@ $(document).ready(function(){
 	function getAllLabel(repoObject){
 		var labelApiUrl="https://api.github.com/repos/"+repoObject.owner+"/"+repoObject.name+"/labels";
 		$.ajax({
-			url:issueApiUrl,
+			url:labelApiUrl,
 			type:"GET",
 			beforeSend:function(xhr){xhr.setRequestHeader("Authorization: token",OAUTH_KEY_VALUE)},
 			success:function(data){
@@ -156,8 +154,8 @@ $(document).ready(function(){
 					  "milestone": 1,
 					  "state": "open",
 					  "labels": [
-					    "Label1",
-					    "Label2"
+							"Label1",
+							"Label2"
 					  ]
 					}
 	* @author sanjaya
