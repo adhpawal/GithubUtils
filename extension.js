@@ -7,6 +7,11 @@ $(document).ready(function(){
 	 var OKAY="ok";
 	 var OPEN_ISSUE_BOARD_PAGE="openIssueBoardPage";
 	 var RELOAD_PAGE="reloadPage";
+	 var ISSUE_BOARD_PAGE="swimlanes.html";
+	 var GET_STORED_OAUTH_VALUE="getStoredOauthValue";
+	 var OAUTH_STORAGE_KEY="oath_key";
+	 var GET_PREFERRED_REPO="getPreferredRepo";
+	 var STORED_REPO_KEY="preferredRepo";
 
 	//populate filter text area after page load.
 	populateFilterTextArea();
@@ -19,7 +24,7 @@ $(document).ready(function(){
 		console.log("request data for extension.js is : "+request);
 		 if (request.action == "read_file"){
 	 		$.ajax({
-		        url: chrome.extension.getURL("swimlanes.html"),
+		        url: chrome.extension.getURL(ISSUE_BOARD_PAGE),
 		        dataType: "html",
 		        success:function(html){
 		        	console.log(html);
@@ -57,6 +62,25 @@ $(document).ready(function(){
 		 	chrome.tabs.create({url:boardPageUrl});
 		 }
 
+		 else if(request.action==GET_STORED_OAUTH_VALUE){
+		 	// var oauthValue="empty";
+		 	chrome.storage.sync.get(OAUTH_STORAGE_KEY,function(data){
+		 		if(data){
+		 			sendResponse({oauthValue:data});
+		 		}
+		 	});
+		 	
+		 }
+
+		 else if(request.action==GET_PREFERRED_REPO){
+		 	console.log("repo value get method");
+		 	chrome.storage.sync.get(STORED_REPO_KEY,function(data){
+		 		if(data){
+		 			sendResponse({preferredRepo:data});
+		 		}
+		 	});
+		 	
+		 }
 		 return true;
 	});
 
@@ -70,6 +94,9 @@ $(document).ready(function(){
 		    chrome.tabs.reload(tabs[0].id);
 		});
 	});
+
+
+
 
 });
 
