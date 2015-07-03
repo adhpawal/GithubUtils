@@ -33,6 +33,15 @@ $(document).ready(function(){
 				});
 			}
 		}
-	}    
+	} 
+
+	/**
+	* Add listener for message passed to dom.js
+	* @author nimesh
+	**/  
+	chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
+
+	});
+
 
 });
