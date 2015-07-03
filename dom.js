@@ -3,9 +3,6 @@ var FILTER_STRING_KEY="filterString";
 
 $(document).ready(function(){
 
-	var RELOAD_PAGE="reloadPage";
-
-
 	/**Load the filter pages stored in browser. After retrievint them apply filter.
 	** @author nimesh
 	**/
@@ -44,14 +41,6 @@ $(document).ready(function(){
 	**/  
 	chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 
-		//listen for reload current page message
-		if(request.action==RELOAD_PAGE){
-			console.log("reload page");
-			chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
-			    var tabUrl=tabs[0].url;
-			    chrome.tabs.reload(tabUrl);
-			});
-		}
 	});
 
 
