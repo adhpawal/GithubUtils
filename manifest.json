@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+ 
+  "name": "Git Utils",
+  "description": "Utility for github",
+  "version": "1.0",
+ 
+
+  "browser_action": {
+   "default_icon": "git-utils-small.png",
+   "default_popup":"index.html"
+  },
+
+  "background" : {
+     "scripts" : ["jquery-1.11.3.min.js","extension.js"]
+   },
+
+  "content_scripts": [
+    {
+    "matches": ["*://github.com/*/files"],
+    "js": ["jquery-1.11.3.min.js","dom.js"]
+    }
+   ],
+
+  "permissions": [
+    "tabs",
+    "storage"
+    ]
+}
