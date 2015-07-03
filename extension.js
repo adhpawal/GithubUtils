@@ -6,6 +6,7 @@ $(document).ready(function(){
 	 var SAVE_FILTER_DATA="saveFilterData";
 	 var OKAY="ok";
 	 var OPEN_ISSUE_BOARD_PAGE="openIssueBoardPage";
+	 var RELOAD_PAGE="reloadPage";
 
 	//populate filter text area after page load.
 	populateFilterTextArea();
@@ -57,6 +58,17 @@ $(document).ready(function(){
 		 }
 
 		 return true;
+	});
+
+	/**
+	* Add change listner for storage changes.
+	* Triggers when key:value stored in chrome local storage changes.
+	**/
+	chrome.storage.onChanged.addListener(function(changes, namespace) {
+		//reload current page to reflect changes in filter data
+		chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+		    chrome.tabs.reload(tabs[0].id);
+		});
 	});
 
 });
