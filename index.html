@@ -1,0 +1,27 @@
+<!doctype <!DOCTYPE html>
+<html>
+<head>
+	<title>Git Utils</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="jquery-1.11.3.min.js"></script>
+</head>
+<body>
+	<div class="main">
+		<div id="main-content">
+			<h1>Git Utils</h1>
+			<div class="introduction">
+				<p>Enter the expression for file you want to hide in the text area. The names must be separated by comma (<b>,</b>).</p>
+				<p>For example: for file /workingcapital-portlet/apiAuthentiationPortlet/apiParserClpSerilizer.java, you can write <b>clpSerializer.java.</b></p>
+				<p>The filter will exclude all the files with names *clpSerializer.java.</p>
+			</div>
+			<span id="message-text" style="display:none;"></span>
+			<div class="filter-field">
+				<textarea rows="5" cols="40" id="filterArea"></textarea>
+				<button id="filter-button">Done</button>
+			</div>	
+		</div>
+	</div>
+	<script src="popup.js"></script>
+	<script src="extension.js"></script>
+</body>
+</html>
