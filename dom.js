@@ -1,8 +1,12 @@
 
-$(document).ready(function(){
-	console.log("dom called");
+var FILTER_STRING_KEY="filterString";
 
-	chrome.storage.sync.get("filterString",function(data){
+$(document).ready(function(){
+
+	/**Load the filter pages stored in browser. After retrievint them apply filter.
+	** @author nimesh
+	**/
+	chrome.storage.sync.get(FILTER_STRING_KEY,function(data){
 		console.log("data from storage: "+data.toString());
 		if(data){
 			filterString=data.filterString;
@@ -17,6 +21,7 @@ $(document).ready(function(){
 	/**
 	* Method to hide pages described in filter list.
 	* @param filterString The string containing list of filter pages separated by comma.	
+	* @author nimesh
 	**/
 	function hideFilterPages(filterString){
 		console.log("hiding filter pages. : "+filterString);
@@ -30,9 +35,4 @@ $(document).ready(function(){
 		}
 	}    
 
-
-	//use this method to send message from content page
-	// chrome.runtime.sendMessage({action:"getDOM"},function(response){
-				// console.log(response);
-	// });
 });
