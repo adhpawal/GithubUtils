@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	var SAVE_FILTER_DATA="saveFilterData";
 	var OKAY="ok";
+	var OPEN_ISSUE_BOARD_PAGE="openIssueBoardPage";
 	//add filter-button click listener.
 	//Store the filter values in chrome storage via message to 
 	$('#filter-button').click(function(){
@@ -18,5 +19,11 @@ $(document).ready(function(){
 		  	$('#message-text').text("Entry save failed.").css("color","red").show();
 		  }
 		});
+	});
+
+	//Issue board button click event
+
+	$('#board-button').click(function(){
+		chrome.runtime.sendMessage({action:OPEN_ISSUE_BOARD_PAGE},function(){})
 	});
 });

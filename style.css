@@ -7,7 +7,7 @@ body{
 	background-color: #3d3d3d;
 	width:400px;
 }
-.main{
+#main{
 	margin: 5px 10px;
 	overflow: hidden;
 }
@@ -15,6 +15,10 @@ h1{
 	color:#f6f8f9;
 	text-align: center;
 	font-family: monospace;
+}
+.filter{
+	border-bottom: 1px solid #636363;
+	padding-bottom: 10px;
 }
 .introduction p, span{
   color:#f6f8f9;
@@ -44,4 +48,25 @@ span{
 	background-color: #f6f8f9;
 	color: black;
 	border-radius: 5px;
+	width: 50px;
+}
+
+.clear-all{
+	clear:both;
+}
+#jira-board-view{
+  padding: 10px 0px;
+  text-align: center;
+}
+#board-button{
+	padding:15px 30px 15px 30px;
+	margin:0 1px 0 0;
+	text-decoration:none;
+	text-align:center;
+	color:#7f8c8d;
+	cursor:pointer;
+	background:#1a1a1a;
+	border:1px solid #34495e;
+	font-size: 14px;
+	font-weight: bold;
 }
