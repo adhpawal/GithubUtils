@@ -2,8 +2,9 @@
 <html>
 <head>
 	<title>Git Utils</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="stylesheet" type="text/css" href="reset.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>	
 	<script src="jquery-1.11.3.min.js"></script>
 </head>
 <body>
@@ -17,7 +18,10 @@
 			</div>
 			<span id="message-text" style="display:none;"></span>
 			<div class="filter-field">
-				<textarea rows="5" cols="40" id="filterArea"></textarea>
+				<p><label for="exclusive"><input type="radio" name= "filter" id="exclusive" checked> Exclusive</label>
+				<textarea rows="5" cols="65" id="filterArea1"></textarea></p>
+				<p><label for="inclusive"><input type="radio" name= "filter" id="inclusive"> Inclusive</label>
+				<textarea rows="5" cols="65" id="filterArea2"></textarea></p>
 				<button id="filter-button">Done</button>
 			</div>	
 			<div class="clear-all"></div>
