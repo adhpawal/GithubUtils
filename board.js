@@ -17,6 +17,8 @@ $(document).ready(function(){
 	var LABEL_4_VALUE="";
 	var MILESTONE=[];
 	var REPOSITORY=[];
+	var ISSUE=[];
+	var LABEL=[];
 	var GET_ALL_REPO_URL="https://api.github.com/user/repos";
 	var GET_STORED_OAUTH_VALUE="getStoredOauthValue";
 	var GET_PREFERRED_REPO="getPreferredRepo";
@@ -75,10 +77,11 @@ $(document).ready(function(){
 		$.ajax({
 			url:GET_ALL_REPO_URL,
 			type:"GET",
-			beforeSend:function(xhr){xhr.setRequestHeader("Authorization: token",OAUTH_KEY_VALUE)},
+			beforeSend:function(xhr){xhr.setRequestHeader("Authorization:","token "+OAUTH_KEY_VALUE)},
 			success:function(data){
-				var jsonObjectList=JSON.parse(data);
-				console.log(jsonObjectList);
+				 $.each(data, function(index) {
+		            REPOSITORY.push(data[index].name);
+		        });
 			}
 		});
 	}
@@ -94,10 +97,11 @@ $(document).ready(function(){
 		$.ajax({
 			url:mileStoneApiUrl,
 			type:"GET",
-			beforeSend:function(xhr){xhr.setRequestHeader("Authorization: token",OAUTH_KEY_VALUE)},
+			beforeSend:function(xhr){xhr.setRequestHeader("Authorization:","token "+OAUTH_KEY_VALUE)},
 			success:function(data){
-				var mileStoneList=JSON.parse(data);
-				console.log(mileStoneList);
+				 $.each(data, function(index) {
+		            MILESTONE.push(data[index].name);
+		        });
 			}
 		});
 	}
@@ -112,10 +116,11 @@ $(document).ready(function(){
 		$.ajax({
 			url:issueApiUrl,
 			type:"GET",
-			beforeSend:function(xhr){xhr.setRequestHeader("Authorization: token",OAUTH_KEY_VALUE)},
+			beforeSend:function(xhr){xhr.setRequestHeader("Authorization:","token "+OAUTH_KEY_VALUE)},
 			success:function(data){
-				var mileStoneList=JSON.parse(data);
-				console.log(mileStoneList);
+				$.each(data, function(index) {
+		            ISSUE.push(data[index].name);
+		        });
 			}
 		});
 	}
@@ -130,10 +135,11 @@ $(document).ready(function(){
 		$.ajax({
 			url:labelApiUrl,
 			type:"GET",
-			beforeSend:function(xhr){xhr.setRequestHeader("Authorization: token",OAUTH_KEY_VALUE)},
+			beforeSend:function(xhr){xhr.setRequestHeader("Authorization:","token "+OAUTH_KEY_VALUE)},
 			success:function(data){
-				var mileStoneList=JSON.parse(data);
-				console.log(mileStoneList);
+				$.each(data, function(index) {
+		            LABEL.push(data[index].name);
+		        });
 			}
 		});
 	}
@@ -149,10 +155,11 @@ $(document).ready(function(){
 		$.ajax({
 			url:issueApiUrl,
 			type:"GET",
-			beforeSend:function(xhr){xhr.setRequestHeader("Authorization: token",OAUTH_KEY_VALUE)},
+			beforeSend:function(xhr){xhr.setRequestHeader("Authorization:","token "+OAUTH_KEY_VALUE)},
 			success:function(data){
-				var mileStoneList=JSON.parse(data);
-				console.log(mileStoneList);
+				$.each(data, function(index) {
+		           console.log(data[index].name);
+		        });
 			}
 		});
 	}
@@ -179,11 +186,10 @@ $(document).ready(function(){
 		$.ajax({
 			url:issueApiUrl,
 			type:"PATCH",
-			beforeSend:function(xhr){xhr.setRequestHeader("Authorization: token",OAUTH_KEY_VALUE)},
+			beforeSend:function(xhr){xhr.setRequestHeader("Authorization:","token "+OAUTH_KEY_VALUE)},
 			data: updateData,
 			success:function(data){
-				var mileStoneList=JSON.parse(data);
-				console.log(mileStoneList);
+		           console.log("success");
 			}
 		});
 	}
