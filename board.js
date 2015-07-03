@@ -55,6 +55,10 @@ $(document).ready(function(){
 		}
 	}
 
+	/**
+	* Method to get list of all repository
+	* @author nimesh
+	**/
 	function getAllGitRepository(){
 		$.ajax({
 			url:GET_ALL_REPO_URL,
@@ -63,6 +67,61 @@ $(document).ready(function(){
 			success:function(data){
 				var jsonObjectList=JSON.parse(data);
 				console.log(jsonObjectList);
+			}
+		});
+	}
+
+
+	/**
+	* Method to get list of all Milestone
+	* @param repoObject A javascript object containing attributes owner(owner organization) and name(name of the repo).
+	* @author nimesh
+	**/
+	function getAllMileStone(repoObject){
+		var mileStoneApiUrl="https://api.github.com/repos/"+repoObject.owner+"/"+repoObject.name+"/milestones";
+		$.ajax({
+			url:mileStoneApiUrl,
+			type:"GET",
+			beforeSend:function(xhr){xhr.setRequestHeader("Authorization: token",OAUTH_KEY_VALUE)},
+			success:function(data){
+				var mileStoneList=JSON.parse(data);
+				console.log(mileStoneList);
+			}
+		});
+	}
+
+	/**
+	* Method to get all Issues in a repo.
+	* @param repoObject A javascript object containing attributes owner(owner organization) and name(name of the repo).
+	* @author nimesh
+	**/
+	function getAllIssues(repoObject){
+		var issueApiUrl="https://api.github.com/repos/"+repoObject.owner+"/"+repoObject.name+"/issues";
+		$.ajax({
+			url:issueApiUrl,
+			type:"GET",
+			beforeSend:function(xhr){xhr.setRequestHeader("Authorization: token",OAUTH_KEY_VALUE)},
+			success:function(data){
+				var mileStoneList=JSON.parse(data);
+				console.log(mileStoneList);
+			}
+		});
+	}
+
+	/**
+	* Method to get all labes for a repo.
+	* @param repoObject A javascript object containing attributes owner(owner organization) and name(name of the repo).
+	* @author nimesh
+	**/
+	function getAllLabel(repoObject){
+		var labelApiUrl="https://api.github.com/repos/"+repoObject.owner+"/"+repoObject.name+"/labels";
+		$.ajax({
+			url:issueApiUrl,
+			type:"GET",
+			beforeSend:function(xhr){xhr.setRequestHeader("Authorization: token",OAUTH_KEY_VALUE)},
+			success:function(data){
+				var mileStoneList=JSON.parse(data);
+				console.log(mileStoneList);
 			}
 		});
 	}
