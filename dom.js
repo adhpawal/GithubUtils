@@ -1,9 +1,6 @@
 
-<<<<<<< HEAD
 const FILTER_STRING_KEY="filterString";
 
-=======
->>>>>>> 9
 $(document).ready(function(){
 	console.log("dom ready");
 	var FILTER_STRING_KEY="filterString";

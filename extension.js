@@ -12,9 +12,29 @@ $(document).ready(function(){
 	 var OAUTH_STORAGE_KEY="oath_key";
 	 var GET_PREFERRED_REPO="getPreferredRepo";
 	 var STORED_REPO_KEY="preferredRepo";
+	 var STORED_MILESTONE_KEY="preferredMileStone";
+	 var STORED_MILESTONE_VALUE="";
+	 var LABEL_1_KEY="label_1";
+	 var LABEL_2_KEY="label_2";
+	 var LABEL_3_KEY="label_3";
+	 var LABEL_4_KEY="label_4";
+	 var LABEL_1_VALUE="";
+	 var LABEL_2_VALUE="";
+	 var LABEL_3_VALUE="";
+	 var LABEL_4_VALUE="";
 
 	//populate filter text area after page load.
 	populateFilterTextArea();
+
+	// var valuePair={};
+	// 	 	valuePair[STORED_REPO_KEY] ="#%Repo$$Key";
+	// 	 	valuePair[OAUTH_STORAGE_KEY]="/Atuth storage//key";
+	// 	 	chrome.storage.sync.set(valuePair, function() {
+	// 	 		if(chrome.runtime.lastError){
+	// 	 		}
+	// 			console.log("okay");
+	//         });
+	
 
 	/**
 	** Add message listners for messages. Listeners listen for message from popup.js and dom.js
@@ -58,15 +78,16 @@ $(document).ready(function(){
 
 		 //message listener to open new tab for issue board
 		 else if(request.action==OPEN_ISSUE_BOARD_PAGE){
-		 	var boardPageUrl=chrome.extension.getURL("swimlanes.html");
+		 	var boardPageUrl=chrome.extension.getURL(ISSUE_BOARD_PAGE);
 		 	chrome.tabs.create({url:boardPageUrl});
 		 }
 
 		 else if(request.action==GET_STORED_OAUTH_VALUE){
-		 	// var oauthValue="empty";
-		 	chrome.storage.sync.get(OAUTH_STORAGE_KEY,function(data){
+		 	var oauthValue="";
+		 	chrome.storage.sync.get([OAUTH_STORAGE_KEY,STORED_REPO_KEY,STORED_MILESTONE_KEY,LABEL_1_KEY,LABEL_2_KEY,LABEL_3_KEY,LABEL_4_KEY],function(data){
 		 		if(data){
-		 			sendResponse({oauthValue:data});
+		 			oauthValue=data;
+		 			sendResponse({oauthValue:oauthValue});
 		 		}
 		 	});
 		 	
@@ -94,9 +115,6 @@ $(document).ready(function(){
 		    chrome.tabs.reload(tabs[0].id);
 		});
 	});
-
-
-
 
 });
 
