@@ -6,8 +6,8 @@
 	<script src="jquery-1.11.3.min.js"></script>
 </head>
 <body>
-	<div class="main">
-		<div id="main-content">
+	<div id="main">
+		<div id="filter" class="filter">
 			<h1>Git Utils</h1>
 			<div class="introduction">
 				<p>Enter the expression for file you want to hide in the text area. The names must be separated by comma (<b>,</b>).</p>
@@ -19,6 +19,10 @@
 				<textarea rows="5" cols="40" id="filterArea"></textarea>
 				<button id="filter-button">Done</button>
 			</div>	
+			<div class="clear-all"></div>
+		</div>
+		<div id="jira-board-view">
+			<button id="board-button">Issue board</button>
 		</div>
 	</div>
 	<script src="popup.js"></script>
