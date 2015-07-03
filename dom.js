@@ -1,29 +1,6 @@
-
-<<<<<<< HEAD
-const FILTER_STRING_KEY="filterString";
-
-=======
->>>>>>> 9
 $(document).ready(function(){
 	console.log("dom ready");
 	var FILTER_STRING_KEY="filterString";
-
-	// /**
-	// * Query current tab on page load to find out which page is loaded, filter page or issue board page.
-	// * Perform the actions according to the result
-	// * @author nimesh
-	// **/
-	// chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
-	// 	var tabUrl=tabs[0].url;
-	// 	if(tabUrl.indexOf(ISSUE_BOARD_PAGE)>-1){
-	// 		console.log("okay");
-	// 		actionForIssueBoardPage();
-	// 	}
-	// 	else{
-			
-	// 	}
-	// });
-
 	applyFilter();
 
 	/**
