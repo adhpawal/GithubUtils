@@ -13,7 +13,6 @@ $(document).ready(function () {
     var STORED_REPO_KEY = "preferredRepo";
     var GET_FILTER_STRING = "getFilterString";
     var SAVE_FILTER_DATA = "saveFilterData";
-    var GET_STORED_OAUTH_VALUE = "getStoredOauthValue";
     var OAUTH_STORAGE_KEY = "oath_key";
     var GET_PREFERRED_REPO = "getPreferredRepo";
     var STORED_REPO_KEY = "preferredRepo";
@@ -78,6 +77,10 @@ $(document).ready(function () {
                 });
                 break;
             case OPEN_ISSUE_BOARD_PAGE :
+                var boardPageUrl = chrome.extension.getURL(ISSUE_BOARD_PAGE);
+                chrome.tabs.create({url: boardPageUrl});
+                break;
+            case GET_STORED_VALUES_FOR_BOARD :
                 var oauthValue = "";
                 chrome.storage.sync.get([OAUTH_STORAGE_KEY, STORED_REPO_KEY, STORED_MILESTONE_KEY, LABEL_1_KEY, LABEL_2_KEY, LABEL_3_KEY, LABEL_4_KEY], function (data) {
                     if (data) {

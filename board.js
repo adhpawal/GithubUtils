@@ -51,10 +51,11 @@ $(document).ready(function(){
 			}
 			console.log(OAUTH_KEY_VALUE,PREFERRED_REPO_VALUE,STORED_MILESTONE_VALUE,LABEL_1_VALUE,LABEL_2_VALUE,LABEL_3_VALUE,LABEL_4_VALUE,IS_GIT_LOGGED_IN);
 			if(OAUTH_KEY_VALUE!="" || !OAUTH_KEY_VALUE){
+				$("#accessed-content").show();
+			}else{
 				$("#page-wrapper-access-token").show();
 				$("#accessed-content").hide();
-			}else{
-				$("#accessed-content").show();
+				
 			}
 		});
 	}
@@ -235,13 +236,12 @@ $(document).ready(function(){
 	$("#form-access-token").on("submit", function(event){
 		event.preventDefault();
 		var accessToken = $("#access-token").val();
-		if(!$("#repoId").val()){
+		if(!accessToken){
 			$(".at-error").show();
 			return false;
 		}
 		//Save Token to Local Storage
+		saveIssueBoardPageParameters(OAUTH_STORAGE_KEY,accessToken);
 		location.reload();
 	});
-
-
 });
