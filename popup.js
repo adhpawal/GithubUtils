@@ -26,4 +26,18 @@ $(document).ready(function(){
 	$('#board-button').click(function(){
 		chrome.runtime.sendMessage({action:OPEN_ISSUE_BOARD_PAGE},function(){})
 	});
+	
+	// Enable disable text area while choosing inclusive or exclusive option
+	
+	document.getElementById("exclusive").onclick=enable1;
+	document.getElementById("inclusive").onclick=enable2;
+	function enable1(){
+	document.getElementById("filterArea1").disabled=false;
+	document.getElementById("filterArea2").disabled=true;
+	}
+	function enable2(){
+	document.getElementById("filterArea2").disabled=false;
+	document.getElementById("filterArea1").disabled=true;
+	}
+	
 });
