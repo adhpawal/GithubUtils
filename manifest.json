@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
  
-  "name": "Git Utils",
+  "name": "GitHub Utils",
   "description": "Utility for github",
   "version": "1.0",
  
