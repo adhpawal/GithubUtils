@@ -263,6 +263,20 @@ $(document).ready(function () {
             saveIssueBoardPageParameters(LABEL_3_KEY, $("#lane3").val());
             saveIssueBoardPageParameters(LABEL_4_KEY, $("#lane4").val());
             alert($("#lane1").val());
+            //Defines Draggable Element
+            $(".draggable").draggable({
+                revert: "invalid",
+                zIndex: 10000,
+                appendTo: "body",
+                stack: ".draggable"
+            });
+
+            //Defines Droppable Element
+            $(".droppable").droppable({
+                tolerance: "intersect",
+                drop: function (event, ui) {
+                }
+            });
             // location.reload();
         } else {
             $("#github-user-setting .alert-danger").show();
@@ -389,5 +403,15 @@ $(document).ready(function () {
             issueFormat+='<div class="panel panel-default draggable"> <div class="panel-heading"> <h3 class="panel-title"><img alt="Issue Detail" src="'+this.user.avatar_url+'" width="20" height="20"/> # Issue '+this.number+'</h3> </div><div class="panel-body"> '+this.title+' </div></div>';
         });
         $("#"+lane).html(issueFormat);
+        $(".draggable").draggable({
+            revert: "invalid",
+            zIndex: 10000,
+            appendTo: "body",
+            stack: ".draggable"
+        });
     }
+
+    $( "#toggle" ).click(function() {
+        $( "#page-wrapper-access-token" ).slideToggle( "slow" );
+    });
 });
