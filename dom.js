@@ -44,7 +44,7 @@ $(document).ready(function(){
 		if(filterString){
 			var filterPages=filterString.split(",");
 			for(var i=0; i<filterPages.length;i++){
-				$('div[data-path*="'+filterPages[i].trim()+'"]').each(function (){
+				$('div[data-path$="'+filterPages[i].trim()+'"]').each(function (){
 					if(filterOption==1){
 						$(this).parent().hide();
 					}
