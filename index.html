@@ -12,15 +12,18 @@
 		<div id="filter" class="filter">
 			<h1>Git Utils</h1>
 			<div class="introduction">
-				<p>Enter the expression for file you want to hide in the text area. The names must be separated by comma (<b>,</b>).</p>
-				<p>Example: For file <em>/workingcapital-portlet/apiAuthenticationPortlet/apiParserClpSerilizer.java</em>, you can write <b>clpSerializer.java.</b>
-				The filter will exclude all the files with names *clpSerializer.java.</p>
+				<p>In the github pull request, you may not be interested on whole content of pullrequest because most of them are boilerplate code. In this extension, you can define rules !<br>
+				You have two options:</p>
+				<p>1. Add pattern of which type of file you are going to exclude from pullrequest(no need to include '*'). <br>
+				2. Add pattern of which type of file you are going to include in pullrequest. <br>
+
+				Note: you are able to choose only one option at a time. </p>
 			</div>
 			<span id="message-text" style="display:none;"></span>
 			<div class="filter-field">
-				<p><label for="exclusive"><input type="radio" name= "filter-radio" id="exclusive" value="1"> Exclude these files</label>
+				<p><label for="exclusive"><input type="radio" name= "filter-radio" id="exclusive" value="1"> Exclude these files (eg: cliper.java, listener.java,/base/)</label>
 				<textarea rows="5" cols="65" id="filterArea1" disabled></textarea></p>
-				<p><label for="inclusive"><input type="radio" name= "filter-radio" id="inclusive" value="0"> Only include these files</label>
+				<p><label for="inclusive"><input type="radio" name= "filter-radio" id="inclusive" value="0"> Only include these files (eg: .css,.js)</label>
 				<textarea rows="5" cols="65" id="filterArea2" disabled></textarea></p>
 				<button id="filter-button">Save</button>
 			</div>	
