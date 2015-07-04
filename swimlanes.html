@@ -9,7 +9,6 @@
     <meta name="author" content="">
 
     <title>Github | Issue Tracking</title>
-
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -35,7 +34,23 @@
             </div>
         </nav>
         <div id="page-wrapper">
+            <div class="row">
+
+                <div class="form-group col-md-3">
+                    <button type="button" class="btn btn-green" id="toggle">Setting</button>
+                </div>
+
+            </div>
             <div id="page-wrapper-access-token">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-dashboard"></i> OAuth Token Setting
+                            </li>
+                        </ol>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="alert alert-danger at-error" style="display:none">
@@ -46,8 +61,7 @@
                                 <label for="access-token">Please Enter the Access Token to enable the Issue Tracking feature.</label>
                                 <input id="access-token" class="form-control" placeholder="Paste Access Token Here">
                             </div>
-                            <div class="clearfix"></div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-3 save-btn-oauth">
                                 <button type="submit" class="btn">Save</button>
                                 <a href="https://github.com/buunguyen/octotree#github-access-token" target="_blank" tabIndex="-1">Why is this required?</a>
                             </div>
@@ -55,14 +69,8 @@
                         <div class="clearfix"></div>
                     </div>
                 </div>
-            </div>
-            <div class="container-fluid" id="accessed-content" style="display:none">
-                <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">
-                            REPO <small>Git Utilities</small>
-                        </h1>
                         <ol class="breadcrumb">
                             <li class="active">
                                 <i class="fa fa-dashboard"></i> Issue Setting
@@ -126,7 +134,9 @@
                         </form>
                     </div>
                 </div>
-
+            </div>
+            <div class="container-fluid" id="accessed-content" style="display:none">
+                <!-- Page Heading -->
                 <!-- /.row -->
                 <div class="row">
                     <div class="col-lg-3 col-md-3">
@@ -137,30 +147,14 @@
                                         <i class="fa fa-comments fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge" id="lane1-count">26</div>
+                                        <div class="huge" id="lane1-count">-/-</div>
                                         <div>Issues</div>
                                     </div>
                                 </div>
-                                <div id="lane1-label">Label 1</div>
+                                <div id="lane1-label">N/A</div>
                             </div>
                                 <div class="panel-footer">
-                                    <div class="col-sm-14 droppable">
-                                        <div class="panel panel-default draggable">
-                                            <div class="panel-heading">
-                                                <h3 class="panel-title"><img alt="Issue Detail" src="#" width="20" height="20"/> #Issue 1</h3>
-                                            </div>
-                                            <div class="panel-body">
-                                                Panel content
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default draggable">
-                                            <div class="panel-heading">
-                                                <h3 class="panel-title"><img alt="Issue Detail" src="#" width="20" height="20"/> #Issue 1</h3>
-                                            </div>
-                                            <div class="panel-body">
-                                                Panel content
-                                            </div>
-                                        </div>
+                                    <div class="col-sm-14 droppable" id="lane1_swim">
                                     </div>
                                 </div>
                         </div>
@@ -173,14 +167,14 @@
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge" id="lane2-count">12</div>
+                                        <div class="huge" id="lane2-count">-/-</div>
                                         <div>Issues</div>
                                     </div>
                                 </div>
-                                <div id="lane2-label">Label 2</div>
+                                <div id="lane2-label">N/A</div>
                             </div>
                                 <div class="panel-footer">
-                                    <div class="col-sm-14 droppable">
+                                    <div class="col-sm-14 droppable" id="lane2_swim">
                                     </div>
                                 </div>
                         </div>
@@ -193,15 +187,15 @@
                                         <i class="fa fa-shopping-cart fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge" id="lane3-count">124</div>
+                                        <div class="huge" id="lane3-count">-/-</div>
                                         <div>Issues</div>
                                     </div>
 
                                 </div>
-                                <div id="lane3-label">Label 3</div>
+                                <div id="lane3-label">N/A</div>
                             </div>
                                 <div class="panel-footer">
-                                    <div class="col-sm-14 droppable">
+                                    <div class="col-sm-14 droppable" id="lane3_swim">
                                     </div>
                                 </div>
                         </div>
@@ -214,14 +208,14 @@
                                         <i class="fa fa-support fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge" id="lane4-count">13</div>
+                                        <div class="huge" id="lane4-count">-/-</div>
                                         <div>Issues</div>
                                     </div>
                                 </div>
-                                <div id="lane4-label">Label 4</div>
+                                <div id="lane4-label">N/A</div>
                             </div>
                                 <div class="panel-footer">
-                                    <div class="col-sm-14 droppable">
+                                    <div class="col-sm-14 droppable" id="lane4_swim">
                                     </div>
                                 </div>
                         </div>
