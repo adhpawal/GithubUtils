@@ -10,227 +10,230 @@
 
     <title>Github | Issue Tracking</title>
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
-    <link href="jquery-ui-1.11.4.custom/jquery-ui.min.css" rel="stylesheet">
+    <link href="css/reset.css" rel="stylesheet" type="text/css">
+    <link href="css/sb-admin.css" rel="stylesheet" type="text/css">
+    <link href="jquery-ui-1.11.4.custom/jquery-ui.min.css" rel="stylesheet" type="text/css">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="style-swimlane.css" rel="stylesheet">
+    <link href="css/style-swimlane.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-    <div id="wrapper">
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <span class="navbar-brand" >Github Utility</span>
-            </div>
-        </nav>
-        <div id="page-wrapper">
-            <div class="row">
-
-                <div class="form-group col-md-3">
-                    <button type="button" class="btn btn-green" id="toggle">Setting</button>
-                </div>
-
-            </div>
-            <div id="page-wrapper-access-token">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <ol class="breadcrumb">
-                            <li class="active">
-                                <i class="fa fa-dashboard"></i> OAuth Token Setting
-                            </li>
-                        </ol>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="alert alert-danger at-error" style="display:none">
-                            Access Token is required.
-                        </div>
-                        <form id="form-access-token">
-                            <div class="form-group col-md-7">
-                                <label for="access-token">Please Enter the Access Token to enable the Issue Tracking feature.</label>
-                                <input id="access-token" class="form-control" placeholder="Paste Access Token Here">
-                            </div>
-                            <div class="form-group col-md-3 save-btn-oauth">
-                                <button type="submit" class="btn">Save</button>
-                                <a href="https://github.com/buunguyen/octotree#github-access-token" target="_blank" tabIndex="-1">Why is this required?</a>
-                            </div>
-                        </form>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <ol class="breadcrumb">
-                            <li class="active">
-                                <i class="fa fa-dashboard"></i> Issue Setting
-                            </li>
-                        </ol>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <form role="form" id="github-user-setting">
-                            <div class="alert alert-success" style="display: none;">
-                                Setting successfully applied.
-                            </div>
-                            <div class="alert alert-danger" style="display: none;">
-                                All fields are required.
-                            </div>
-                            <fieldset>
-                                <div class="form-group col-md-3">
-                                    <label for="repoId">Repo Menu</label>
-                                    <select id="repoId" class="form-control">
-                                        <option>Select</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="mileStone">MileStone Menu</label>
-                                    <select id="mileStone" class="form-control">
-                                        <option>Select</option>
-                                    </select>
-                                </div>
-                                <div class="clearfix"></div>
-
-                                <div class="form-group col-md-3">
-                                    <label for="lane1">Lane 1</label>
-                                    <select id="lane1" class="form-control label-class">
-                                        <option>Select</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="lane2">Lane 2</label>
-                                    <select id="lane2" class="form-control label-class">
-                                        <option>Select</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="lane3">Lane 3</label>
-                                    <select id="lane3" class="form-control label-class">
-                                        <option>Select</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="lane4">Lane 4</label>
-                                    <select id="lane4" class="form-control label-class">
-                                        <option>Select</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <button type="submit" class="btn btn-primary">Save Setting</button>
-                                </div>
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="container-fluid" id="accessed-content" style="display:none">
-                <!-- Page Heading -->
-                <!-- /.row -->
-                <div class="row">
-                    <div class="col-lg-3 col-md-3">
-                        <div class="panel panel-red">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-comments fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge" id="lane1-count">-/-</div>
-                                        <div>Issues</div>
-                                    </div>
-                                </div>
-                                <div id="lane1-label">N/A</div>
-                            </div>
-                                <div class="panel-footer">
-                                    <div class="col-sm-14 droppable" id="lane1_swim">
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-tasks fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge" id="lane2-count">-/-</div>
-                                        <div>Issues</div>
-                                    </div>
-                                </div>
-                                <div id="lane2-label">N/A</div>
-                            </div>
-                                <div class="panel-footer">
-                                    <div class="col-sm-14 droppable" id="lane2_swim">
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3">
-                        <div class="panel panel-yellow">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-shopping-cart fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge" id="lane3-count">-/-</div>
-                                        <div>Issues</div>
-                                    </div>
-
-                                </div>
-                                <div id="lane3-label">N/A</div>
-                            </div>
-                                <div class="panel-footer">
-                                    <div class="col-sm-14 droppable" id="lane3_swim">
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3">
-                        <div class="panel panel-green">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-support fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge" id="lane4-count">-/-</div>
-                                        <div>Issues</div>
-                                    </div>
-                                </div>
-                                <div id="lane4-label">N/A</div>
-                            </div>
-                                <div class="panel-footer">
-                                    <div class="col-sm-14 droppable" id="lane4_swim">
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.row -->
-            </div>
-            <!-- /.container-fluid -->
+<div id="wrapper">
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand">Github Utility</span>
         </div>
-        <!-- /#page-wrapper -->
+    </nav>
+    <div id="page-wrapper">
+        <div class="row">
+
+            <div class="form-group col-md-3">
+                <button type="button" class="btn btn-green" id="toggle">Setting</button>
+            </div>
+
+        </div>
+        <div id="page-wrapper-access-token">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ol class="breadcrumb">
+                        <li class="active">
+                            <i class="fa fa-dashboard"></i> OAuth Token Setting
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="alert alert-danger at-error" style="display:none">
+                        Access Token is required.
+                    </div>
+                    <form id="form-access-token">
+                        <div class="form-group col-md-7">
+                            <label for="access-token">Please Enter the Access Token to enable the Issue Tracking
+                                feature.</label>
+                            <input id="access-token" class="form-control" placeholder="Paste Access Token Here">
+                        </div>
+                        <div class="form-group col-md-3 save-btn-oauth">
+                            <button type="submit" class="btn">Save</button>
+                            <a href="https://github.com/buunguyen/octotree#github-access-token" target="_blank"
+                               tabIndex="-1">Why is this required?</a>
+                        </div>
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ol class="breadcrumb">
+                        <li class="active">
+                            <i class="fa fa-dashboard"></i> Issue Setting
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <form role="form" id="github-user-setting">
+                        <div class="alert alert-success" style="display: none;">
+                            Setting successfully applied.
+                        </div>
+                        <div class="alert alert-danger" style="display: none;">
+                            All fields are required.
+                        </div>
+                        <fieldset>
+                            <div class="form-group col-md-3">
+                                <label for="repoId">Repo Menu</label>
+                                <select id="repoId" class="form-control">
+                                    <option>Select</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="mileStone">MileStone Menu</label>
+                                <select id="mileStone" class="form-control">
+                                    <option>Select</option>
+                                </select>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="form-group col-md-3">
+                                <label for="lane1">Lane 1</label>
+                                <select id="lane1" class="form-control label-class">
+                                    <option>Select</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="lane2">Lane 2</label>
+                                <select id="lane2" class="form-control label-class">
+                                    <option>Select</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="lane3">Lane 3</label>
+                                <select id="lane3" class="form-control label-class">
+                                    <option>Select</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="lane4">Lane 4</label>
+                                <select id="lane4" class="form-control label-class">
+                                    <option>Select</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <button type="submit" class="btn btn-primary">Save Setting</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" id="accessed-content" style="display:none">
+            <!-- Page Heading -->
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-comments fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge" id="lane1-count">-/-</div>
+                                    <div>Issues</div>
+                                </div>
+                            </div>
+                            <div id="lane1-label">N/A</div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="col-sm-14 droppable" id="lane1_swim">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-tasks fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge" id="lane2-count">-/-</div>
+                                    <div>Issues</div>
+                                </div>
+                            </div>
+                            <div id="lane2-label">N/A</div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="col-sm-14 droppable" id="lane2_swim">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-shopping-cart fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge" id="lane3-count">-/-</div>
+                                    <div>Issues</div>
+                                </div>
+
+                            </div>
+                            <div id="lane3-label">N/A</div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="col-sm-14 droppable" id="lane3_swim">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-support fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge" id="lane4-count">-/-</div>
+                                    <div>Issues</div>
+                                </div>
+                            </div>
+                            <div id="lane4-label">N/A</div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="col-sm-14 droppable" id="lane4_swim">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
     </div>
-    <!-- /#wrapper -->
-    <script src="jquery-1.11.3.min.js"></script>
-    <script src="jquery-ui-1.11.4.custom/jquery-ui.js"></script>
-    <script src="board.js"></script>
+    <!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->
+<script src="jquery-1.11.3.min.js"></script>
+<script src="jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+<script src="board.js"></script>
 </body>
 
 </html>
