@@ -263,7 +263,7 @@ $(document).ready(function () {
             saveIssueBoardPageParameters(LABEL_2_KEY, $("#lane2").val());
             saveIssueBoardPageParameters(LABEL_3_KEY, $("#lane3").val());
             saveIssueBoardPageParameters(LABEL_4_KEY, $("#lane4").val());
-            alert($("#lane1").val());
+            
             //Defines Draggable Element
             $(".draggable").draggable({
                 revert: "invalid",
