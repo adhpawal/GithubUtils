@@ -204,15 +204,16 @@ $(document).ready(function () {
 					}
      * @author sanjaya
      **/
-    function editSpecificIssues(repoObject, issueNumber, updateData) {
+    function editSpecificIssues(repoObject, issueNumber, newLabel) {
         var issueApiUrl = "https://api.github.com/repos/" + repoObject.owner + "/" + repoObject.name + "/issues/" + issueNumber;
+        jsonObj = '{"labels": ["'+newLabel+'"]}';
         $.ajax({
             url: issueApiUrl,
             type: "PATCH",
             beforeSend: function (xhr) {
                 xhr.setRequestHeader("Authorization", "token " + OAUTH_KEY_VALUE)
             },
-            data: updateData,
+            data: jsonObj,
             success: function (data) {
                 console.log("success");
             }
