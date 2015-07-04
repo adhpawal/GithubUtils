@@ -1,5 +1,7 @@
 $(document).ready(function(){
-	var FILTER_STRING_KEY="filterString";
+	var EXCLUDE_PAGES="excluedPages";
+    var INCLUDE_ONLY_PAGES="includeOnlyPages";
+    var FILTER_OPTION="filterOption";
 	applyFilter();
 
 	/**
@@ -11,12 +13,19 @@ $(document).ready(function(){
 		/**Load the filter pages stored in browser. After retrieving, apply filter.
 		** @author nimesh
 		**/
-		chrome.storage.sync.get(FILTER_STRING_KEY,function(data){
-			console.log("data from storage: "+data.toString());
+		chrome.storage.sync.get([EXCLUDE_PAGES,INCLUDE_ONLY_PAGES,FILTER_OPTION],function(data){
+			console.log("data from storage: "+JSON.stringify(data));
 			if(data){
-				filterString=data.filterString;
-				console.log(filterString);
-				hideFilterPages(filterString);
+				var filterString;
+				var filterOption=data[FILTER_OPTION];
+				if(filterOption==1){
+					//apply exclude files filter.
+					filterString=data[EXCLUDE_PAGES];
+				}
+				else if(filterOption==0){
+					filterString=data[INCLUDE_ONLY_PAGES];
+				}
+				hideFilterPages(filterString,filterOption);
 			}
 			else{
 				console.log("no data for filter");
@@ -30,14 +39,23 @@ $(document).ready(function(){
 	* @param filterString The string containing list of filter pages separated by comma.	
 	* @author nimesh
 	**/
-	function hideFilterPages(filterString){
+	function hideFilterPages(filterString,filterOption){
 		console.log("hiding filter pages. : "+filterString);
 		if(filterString){
 			var filterPages=filterString.split(",");
 			for(var i=0; i<filterPages.length;i++){
 				$('div[data-path*="'+filterPages[i].trim()+'"]').each(function (){
-					$(this).parent().hide();
+					if(filterOption==1){
+						$(this).parent().hide();
+					}
+					else if(filterOption==0){
+						$(this).attr("data-show","show");
+					}
+					
 				});
+			}
+			if(filterOption==0){
+				$("div[data-path]:not([data-show])").parent().hide();
 			}
 		}
 	} 

@@ -4,11 +4,23 @@
         var SAVE_FILTER_DATA = "saveFilterData";
         var OKAY = "ok";
         var OPEN_ISSUE_BOARD_PAGE = "openIssueBoardPage";
+        var EXCLUDE_PAGES="excluedPages";
+        var INCLUDE_ONLY_PAGES="includeOnlyPages";
         //add filter-button click listener.
         //Store the filter values in chrome storage via message to
         $('#filter-button').on("click",function () {
-            var filterPages = $('#filterArea').val();
-            chrome.runtime.sendMessage({action: SAVE_FILTER_DATA, data: filterPages}, function (response) {
+        	var saveTo;
+        	var filterPages;
+        	var filterOption=$('input[name="filter-radio"]:checked').val();
+        	if(filterOption==1){
+        		saveTo=EXCLUDE_PAGES;
+        		filterPages = $('#filterArea1').val();
+        	}
+        	else if(filterOption==0){
+        		saveTo=INCLUDE_ONLY_PAGES;
+        		filterPages=$('#filterArea2').val();
+        	}
+            chrome.runtime.sendMessage({action: SAVE_FILTER_DATA, data: filterPages,key:saveTo,filterOption:filterOption}, function (response) {
                 if (response && response.status == OKAY) {
                     $('#message-text').text("Entry saved successfully.").css("color", "green").show();
                 }

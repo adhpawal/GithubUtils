@@ -13,16 +13,16 @@
 			<h1>Git Utils</h1>
 			<div class="introduction">
 				<p>Enter the expression for file you want to hide in the text area. The names must be separated by comma (<b>,</b>).</p>
-				<p>For example: for file /workingcapital-portlet/apiAuthenticationPortlet/apiParserClpSerilizer.java, you can write <b>clpSerializer.java.</b></p>
-				<p>The filter will exclude all the files with names *clpSerializer.java.</p>
+				<p>Example: For file <em>/workingcapital-portlet/apiAuthenticationPortlet/apiParserClpSerilizer.java</em>, you can write <b>clpSerializer.java.</b>
+				The filter will exclude all the files with names *clpSerializer.java.</p>
 			</div>
 			<span id="message-text" style="display:none;"></span>
 			<div class="filter-field">
-				<p><label for="exclusive"><input type="radio" name= "filter" id="exclusive"> Exclusive</label>
+				<p><label for="exclusive"><input type="radio" name= "filter-radio" id="exclusive" value="1"> Exclude these files</label>
 				<textarea rows="5" cols="65" id="filterArea1" disabled></textarea></p>
-				<p><label for="inclusive"><input type="radio" name= "filter" id="inclusive"> Inclusive</label>
+				<p><label for="inclusive"><input type="radio" name= "filter-radio" id="inclusive" value="0"> Only include these files</label>
 				<textarea rows="5" cols="65" id="filterArea2" disabled></textarea></p>
-				<button id="filter-button">Done</button>
+				<button id="filter-button">Save</button>
 			</div>	
 			<div class="clear-all"></div>
 		</div>
