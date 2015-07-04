@@ -29,6 +29,7 @@ $(document).ready(function () {
     var LEVEL2_ISSUE=[];
     var LEVEL3_ISSUE=[];
     var LEVEL4_ISSUE=[];
+    var repoObject;
 
     actionForIssueBoardPage();
     
@@ -95,7 +96,7 @@ $(document).ready(function () {
                 });
                 if (isOldValueSet && PREFERRED_REPO_VALUE) {
                     $('#repoId').val(PREFERRED_REPO_VALUE);
-                    var repoObject = REPOSITORY[PREFERRED_REPO_VALUE];
+                    repoObject = REPOSITORY[PREFERRED_REPO_VALUE];
                     getAllMileStone(repoObject,true);
                     getAllLabel(repoObject,true);
                 }
@@ -203,16 +204,16 @@ $(document).ready(function () {
 					}
      * @author sanjaya
      **/
-    function editSpecificIssues(repoObject, issueNumber, newLabel) {
-        var issueApiUrl = "https://api.github.com/repos/" + repoObject.owner + "/" + repoObject.name + "/issues/" + issueNumber;
-        jsonObj = '{"labels": ["'+newLabel+'"]}';
+    function editSpecificIssues(repoObject, issueNumber, updateData) {
+        var issueApiUrl = "https://api.github.com/repos/" + repoObject.full_name + "/issues/" + issueNumber;
+        var newLabel='{"labels": ["'+updateData+'"]}';
         $.ajax({
             url: issueApiUrl,
             type: "PATCH",
             beforeSend: function (xhr) {
                 xhr.setRequestHeader("Authorization", "token " + OAUTH_KEY_VALUE)
             },
-            data: jsonObj,
+            data:newLabel,
             success: function (data) {
             }
         });
@@ -248,6 +249,29 @@ $(document).ready(function () {
     $(".droppable").droppable({
         tolerance: "intersect",
         drop: function (event, ui) {
+            var draggableNumber = ui.draggable.attr("data-number");
+            var laneId = $(this).attr("id");
+            var updateData = "";
+            switch (laneId) {
+                case "lane1_swim" :
+                    updateData = LABEL_1_VALUE;
+                    break;
+                case "lane2_swim" :
+                    updateData = LABEL_2_VALUE;
+                    break;
+
+                case "lane3_swim" :
+                    updateData = LABEL_3_VALUE;
+                    break;
+
+                case "lane4_swim" :
+                    updateData = LABEL_4_VALUE;
+                    break;
+                default :
+                    break;
+            }
+            if (!updateData) return;
+            editSpecificIssues(repoObject,draggableNumber , updateData);
         }
     });
 
@@ -264,22 +288,6 @@ $(document).ready(function () {
             saveIssueBoardPageParameters(LABEL_2_KEY, $("#lane2").val());
             saveIssueBoardPageParameters(LABEL_3_KEY, $("#lane3").val());
             saveIssueBoardPageParameters(LABEL_4_KEY, $("#lane4").val());
-
-            //Defines Draggable Element
-            $(".draggable").draggable({
-                revert: "invalid",
-                zIndex: 10000,
-                appendTo: "body",
-                stack: ".draggable"
-            });
-
-            //Defines Droppable Element
-            $(".droppable").droppable({
-                tolerance: "intersect",
-                drop: function (event, ui) {
-                }
-            });
-            // location.reload();
         } else {
             $("#github-user-setting .alert-danger").show();
             return false;
@@ -402,7 +410,7 @@ $(document).ready(function () {
     function appendIssueToRespectiveLane(issueList, lane){
         var issueFormat="";
         $(issueList).each(function(){
-            issueFormat+='<div class="panel panel-default draggable"> <div class="panel-heading"> <h3 class="panel-title"><img alt="Issue Detail" src="'+this.user.avatar_url+'" width="20" height="20"/> # Issue '+this.number+'</h3> </div><div class="panel-body"> '+this.title+' </div></div>';
+            issueFormat+='<div class="panel panel-default draggable" data-number="'+this.number+'"> <div class="panel-heading"> <h3 class="panel-title"><img alt="Issue Detail" src="'+this.user.avatar_url+'" width="20" height="20"/> # Issue '+this.number+'</h3> </div><div class="panel-body"> '+this.title+' </div></div>';
         });
         $("#"+lane).html(issueFormat);
         $(".draggable").draggable({
