@@ -20,7 +20,8 @@ aside{
 }
 
 .panel-footer{
-	min-height: 300px;
+	height: 600px;
+	overflow-y: auto;
 }
 
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
