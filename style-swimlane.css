@@ -20,8 +20,7 @@ aside{
 }
 
 .panel-footer{
-	height: 600px;
-	overflow-y: auto;
+	min-height: 600px;
 }
 
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
@@ -33,4 +32,8 @@ aside{
 
 .droppable{
 	min-height: 300px;
+}
+
+.save-btn-oauth{
+	margin-top: 25px;
 }
