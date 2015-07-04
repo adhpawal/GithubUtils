@@ -55,6 +55,7 @@ $(document).ready(function () {
             console.log(OAUTH_KEY_VALUE, PREFERRED_REPO_VALUE, STORED_MILESTONE_VALUE, LABEL_1_VALUE, LABEL_2_VALUE, LABEL_3_VALUE, LABEL_4_VALUE, IS_GIT_LOGGED_IN);
             if (OAUTH_KEY_VALUE != "" || !OAUTH_KEY_VALUE) {
                 $("#accessed-content").show();
+                $("#page-wrapper-access-token").slideToggle("fast");
                 //call actions for issue page
                 getGithubRequiredVariables();
             } else {
@@ -263,7 +264,7 @@ $(document).ready(function () {
             saveIssueBoardPageParameters(LABEL_2_KEY, $("#lane2").val());
             saveIssueBoardPageParameters(LABEL_3_KEY, $("#lane3").val());
             saveIssueBoardPageParameters(LABEL_4_KEY, $("#lane4").val());
-            
+
             //Defines Draggable Element
             $(".draggable").draggable({
                 revert: "invalid",
