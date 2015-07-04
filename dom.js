@@ -14,7 +14,6 @@ $(document).ready(function(){
 		** @author nimesh
 		**/
 		chrome.storage.sync.get([EXCLUDE_PAGES,INCLUDE_ONLY_PAGES,FILTER_OPTION],function(data){
-			console.log("data from storage: "+JSON.stringify(data));
 			if(data){
 				var filterString;
 				var filterOption=data[FILTER_OPTION];
@@ -28,7 +27,6 @@ $(document).ready(function(){
 				hideFilterPages(filterString,filterOption);
 			}
 			else{
-				console.log("no data for filter");
 			}
 		});
 	}
@@ -40,7 +38,6 @@ $(document).ready(function(){
 	* @author nimesh
 	**/
 	function hideFilterPages(filterString,filterOption){
-		console.log("hiding filter pages. : "+filterString);
 		if(filterString){
 			var filterPages=filterString.split(",");
 			for(var i=0; i<filterPages.length;i++){
@@ -60,11 +57,4 @@ $(document).ready(function(){
 		}
 	} 
 
-	/**
-	* Add listener for message passed to dom.js
-	* @author nimesh
-	**/  
-	chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
-
-	});
 });

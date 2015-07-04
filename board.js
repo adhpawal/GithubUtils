@@ -32,6 +32,7 @@ $(document).ready(function () {
     var repoObject;
 
     actionForIssueBoardPage();
+    
     /**
      * Function to perform actions for issue board page.
      * Actions include check git oauth key,value in local storage.
@@ -53,7 +54,6 @@ $(document).ready(function () {
                 LABEL_3_VALUE = resonseValue[LABEL_3_KEY];
                 LABEL_4_VALUE = resonseValue[LABEL_4_KEY];
             }
-            console.log(OAUTH_KEY_VALUE, PREFERRED_REPO_VALUE, STORED_MILESTONE_VALUE, LABEL_1_VALUE, LABEL_2_VALUE, LABEL_3_VALUE, LABEL_4_VALUE, IS_GIT_LOGGED_IN);
             if (OAUTH_KEY_VALUE != "" || !OAUTH_KEY_VALUE) {
                 $("#accessed-content").show();
                 $("#page-wrapper-access-token").slideToggle("fast");

@@ -1,5 +1,3 @@
-(function () {
-    "use strict";
     $(document).ready(function () {
         var SAVE_FILTER_DATA = "saveFilterData";
         var OKAY = "ok";
@@ -37,28 +35,16 @@
         });
 
         // Enable disable text area while choosing inclusive or exclusive option
-        document.getElementById("exclusive").onchange = enable1;
-        document.getElementById("inclusive").onchange = enable2;
 
-        /**
-         * Toggle Between Filter State.
-         *
-         * @author aakas
-         */
-        function enable1() {
-            document.getElementById("filterArea1").disabled = false;
-            document.getElementById("filterArea2").disabled = true;
-        }
+        $('#exclusive').change(function(){
+        	$('#filterArea2').prop('disabled',true);
+        	$('#filterArea1').prop('disabled',false);
+        });
 
-        /**
-         * Toggle Between Filter State.
-         *
-         * @author aakas
-         */
-        function enable2() {
-            document.getElementById("filterArea2").disabled = false;
-            document.getElementById("filterArea1").disabled = true;
-        }
+         $('#inclusive').change(function(){
+        	$('#filterArea2').prop('disabled',false);
+        	$('#filterArea1').prop('disabled',true);
+        });
+        
     });
 
-})();

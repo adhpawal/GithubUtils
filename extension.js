@@ -29,18 +29,10 @@ $(document).ready(function () {
     var EXCLUDE_PAGES="excluedPages";
     var INCLUDE_ONLY_PAGES="includeOnlyPages";
     var FILTER_OPTION="filterOption";
+    var READ_FILE="read_file";
 
     //populate filter text area after page load.
     populateFilterTextArea();
-
-    // var valuePair={};
-    // 	 	valuePair[STORED_REPO_KEY] ="#%Repo$$Key";
-    // 	 	valuePair[OAUTH_STORAGE_KEY]="/Atuth storage//key";
-    // 	 	chrome.storage.sync.set(valuePair, function() {
-    // 	 		if(chrome.runtime.lastError){
-    // 	 		}
-    // 			console.log("okay");
-    //         });
 
 
     /**
@@ -48,9 +40,8 @@ $(document).ready(function () {
      ** These listeners serve as trigger to take appropriate action.
      **/
     chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-        console.log("request data for extension.js is : " + request);
         switch (request.action) {
-            case "read_file" :
+            case READ_FILE :
                 $.ajax({
                     url: chrome.extension.getURL(ISSUE_BOARD_PAGE),
                     dataType: "html",
@@ -113,7 +104,6 @@ $(document).ready(function () {
             	break;
             default :
         }
-        console.log("Returned State")
         return true;
     });
 
