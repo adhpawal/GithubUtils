@@ -1,0 +1,79 @@
+body {
+    background-color: white;
+    font: 12px/18px 'Open Sans', sans-serif;
+}
+
+#main {
+    margin: 5px 10px;
+    overflow: hidden;
+    width: 400px;
+}
+
+h1 {
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    font-size: 18px;
+    margin: 3px 0px;
+    padding: 5px 0px;
+}
+
+.filter {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.introduction p, span {
+    color: black;
+    line-height: 16px;
+    word-wrap: break-word;
+    margin: 10px 5px;
+}
+
+span {
+    float: left;
+}
+
+.filter-field {
+    text-align: left;
+    clear: both;
+}
+
+.filter-field label {
+    display: block;
+}
+
+.filter-field textarea {
+
+    border: 1px solid #d8dfe3;
+    font-size: 10px;
+    color: black;
+    margin: 10px 0px;
+}
+
+.clear-all {
+    clear: both;
+}
+
+#jira-board-view {
+    padding: 10px 0px;
+    text-align: center;
+}
+
+button {
+    padding: 5px 10px;
+    margin: 0 1px 0 0;
+    text-decoration: none;
+    text-align: center;
+    color: black;
+    cursor: pointer;
+    background-color: white border : 0 px;
+}
+
+#board-button{ background: #337ab7; color:#fff; border: 1px #337ab7 solid; border-radius: 4px; padding: 5px 10px;}
+.introduction ol{ margin-left: 40px;}
+.introduction ol li{
+list-style: decimal;}
+
+
