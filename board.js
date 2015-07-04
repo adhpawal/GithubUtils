@@ -283,7 +283,7 @@ $(document).ready(function () {
             $("#github-user-setting .alert-success").show();
             //Save token to Local Storage
             saveIssueBoardPageParameters(STORED_REPO_KEY, $("#repoId").val());
-            saveIssueBoardPageParameters(STORED_MILESTONE_KEY, $("#milestone").val());
+            saveIssueBoardPageParameters(STORED_MILESTONE_KEY, $("#mileStone").val());
             saveIssueBoardPageParameters(LABEL_1_KEY, $("#lane1").val());
             saveIssueBoardPageParameters(LABEL_2_KEY, $("#lane2").val());
             saveIssueBoardPageParameters(LABEL_3_KEY, $("#lane3").val());
