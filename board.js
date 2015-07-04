@@ -288,6 +288,7 @@ $(document).ready(function () {
             saveIssueBoardPageParameters(LABEL_2_KEY, $("#lane2").val());
             saveIssueBoardPageParameters(LABEL_3_KEY, $("#lane3").val());
             saveIssueBoardPageParameters(LABEL_4_KEY, $("#lane4").val());
+            location.reload();
         } else {
             $("#github-user-setting .alert-danger").show();
             return false;
@@ -410,7 +411,7 @@ $(document).ready(function () {
     function appendIssueToRespectiveLane(issueList, lane){
         var issueFormat="";
         $(issueList).each(function(){
-            issueFormat+='<div class="panel panel-default draggable" data-number="'+this.number+'"> <div class="panel-heading"> <h3 class="panel-title"><img alt="Issue Detail" src="'+this.user.avatar_url+'" width="20" height="20"/> # Issue '+this.number+'</h3> </div><div class="panel-body"> '+this.title+' </div></div>';
+            issueFormat+='<div class="panel panel-default draggable" data-number="'+this.number+'"> <div class="panel-heading"> <h3 class="panel-title"><img alt="Issue Detail" src="'+this.user.avatar_url+'" width="20" height="20"/> <a href="'+this.html_url+'" target="_blank"># Issue '+this.number+'</a></h3> </div><div class="panel-body"> '+this.title+' </div></div>';
         });
         $("#"+lane).html(issueFormat);
         $(".draggable").draggable({
