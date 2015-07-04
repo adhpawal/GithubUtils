@@ -1,4 +1,3 @@
-var FILTER_STRING_KEY = "filterString";
 
 $(document).ready(function () {
     var GET_FILTER_STRING = "getFilterString";
@@ -27,6 +26,9 @@ $(document).ready(function () {
     var LABEL_3_VALUE = "";
     var LABEL_4_VALUE = "";
     var SAVE_PARAMETER_ACTION="saveParameters";
+    var EXCLUDE_PAGES="excluedPages";
+    var INCLUDE_ONLY_PAGES="includeOnlyPages";
+    var FILTER_OPTION="filterOption";
 
     //populate filter text area after page load.
     populateFilterTextArea();
@@ -68,7 +70,8 @@ $(document).ready(function () {
             case SAVE_FILTER_DATA :
                 filterPages = request.data
                 var valuePair = {};
-                valuePair[FILTER_STRING_KEY] = filterPages;
+                valuePair[request.key] = filterPages;
+                valuePair[FILTER_OPTION]=request.filterOption;
                 chrome.storage.sync.set(valuePair, function () {
                     if (chrome.runtime.lastError) {
                         sendResponse({status: chrome.runtime.lastError.message});
@@ -124,27 +127,36 @@ $(document).ready(function () {
             chrome.tabs.reload(tabs[0].id);
         });
     });
+
+    //Method to get filter string from chrome storage
+	//@author nimesh
+	function getFilterStringFromStorage() {
+	    filterString = "";
+	    chrome.storage.sync.get([FILTER_STRING_KEY], function (data) {
+	        if (data) {
+	            filterString = data.filterString;
+	        }
+	    });
+	    return filterString;
+	}
+
+	//Method to populate filter text area.
+	//@author nimesh
+	function populateFilterTextArea() {
+	    chrome.storage.sync.get([EXCLUDE_PAGES,INCLUDE_ONLY_PAGES,FILTER_OPTION],function(data) {
+	        if (data) {
+	        	$('#filterArea1').val(data[EXCLUDE_PAGES]);
+	            $('#filterArea2').val(data[INCLUDE_ONLY_PAGES]);
+	            var filterOption=data[FILTER_OPTION];
+	            if(filterOption==1){
+	            	$('#exclusive').prop('checked',true);
+	            	$('#filterArea1').prop('disabled',false);	
+	            }
+	            else if(filterOption==0){
+	            	$('#inclusive').prop('checked',true);
+	            	$('#filterArea2').prop('disabled',false);	
+	            }
+	        }
+	    });
+	}
 });
-
-//Method to get filter string from chrome storage
-//@author nimesh
-function getFilterStringFromStorage() {
-    filterString = "";
-    chrome.storage.sync.get([FILTER_STRING_KEY], function (data) {
-        if (data) {
-            filterString = data.filterString;
-        }
-    });
-    return filterString;
-}
-
-//Method to populate filter text area.
-//@author nimesh
-function populateFilterTextArea() {
-    chrome.storage.sync.get([FILTER_STRING_KEY], function (data) {
-        if (data) {
-            filterString = data.filterString;
-            $('#filterArea').val(filterString);
-        }
-    });
-}
